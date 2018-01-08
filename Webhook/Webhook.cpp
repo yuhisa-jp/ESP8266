@@ -32,6 +32,9 @@ bool WebhookClass::post (String data)
   WiFiClientSecure client;
   char buffer[128];
   String response;
+  
+  data.replace("\n", "\\n");
+  data.replace("\r", "\\r");
       
   if (!client.connect(WebhookHost.c_str(), 443)) {
     DEBUG_WEBHOOK("[WEBHOOK] Connection Failed\n");
@@ -41,6 +44,9 @@ bool WebhookClass::post (String data)
   delay(0);
 
   DEBUG_WEBHOOK("[WEBHOOK] start request\n");
+  DEBUG_WEBHOOK("[WEBHOOK] request %s%s\n", WebhookHost.c_str(), WebhookEndpoint.c_str());
+  DEBUG_WEBHOOK("[WEBHOOK] Content-Type: %s\n", WebhookContentType.c_str());
+  DEBUG_WEBHOOK("[WEBHOOK] data %s\n", data.c_str());
   
   sprintf(buffer, "POST %s HTTP/1.1", WebhookEndpoint.c_str());
   client.println(buffer);
@@ -63,6 +69,7 @@ bool WebhookClass::post (String data)
     if (response == "\r") break;
   }
 
+  DEBUG_WEBHOOK("[WEBHOOK] response %s\n", response.c_str());
   DEBUG_WEBHOOK("[WEBHOOK] end response\n");
   
   client.stop();
