@@ -29,7 +29,8 @@ Webhook.post("payload={\"text\": \"Webhook Test!\"}");
 
 ## Webhook.post()
 ### 概要
-POSTメソッドを使用して `Webhook.setHost()` の設定値にデータを送信します。
+POSTメソッドを使用して `Webhook.setHost()` の設定値に引数をメッセージボディとして送信します。
+ - メッセージボディ内の改行コードは自動的にエスケープ処理されます。
 
 ### 構文
 `Webhook.post(data)`
