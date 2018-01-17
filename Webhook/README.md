@@ -20,9 +20,9 @@ Webhook.post("payload={\"text\": \"Webhook Test!\"}");
 
 ### 引数
 - `host`: hostname 
-  - ex. `hooks.slack.com` - String
+  - ex. `hooks.slack.com` - char文字列
 - `endpoint`: request URI
-  - ex. `/services/xxxxxxxxx/yyyyyyyyy/zzzzzzzzzz/` - String
+  - ex. `/services/xxxxxxxxx/yyyyyyyyy/zzzzzzzzzz/` - char文字列
 
 ### 戻り値
 `なし`
@@ -51,7 +51,7 @@ POSTメソッドを使用して `Webhook.setHost()` の設定値に引数をメ�
 
 ### 引数
 - `contentType`: Content-type
-  - ex. `application/x-www-form-urlencoded` - String
+  - ex. `application/x-www-form-urlencoded` - char文字列
 
 ### 戻り値
 `なし`
