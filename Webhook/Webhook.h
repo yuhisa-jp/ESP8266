@@ -1,7 +1,7 @@
 /**
  *
  * @file Webhook.h
- * @date 17.01.2018
+ * @date 27.01.2018
  * @author yuhisa
  * This file is distributed under GNU Lesser General Public License v2.1.
  */
@@ -21,16 +21,28 @@
 class WebhookClass
 {
 
-  private:
-    char* WebhookHost;
-    char* WebhookEndpoint;
-    char WebhookContentType[64] = "application/x-www-form-urlencoded";
-  
-  public:
-    void setHost (char* host, char* endpoint);
-    void setContentType (char* type);
-    bool post (String data);
-    
+private:
+  char* Host;
+  char* Endpoint;
+  char* Header;
+  char ContentType[128] = "application/x-www-form-urlencoded";
+  uint16_t Port = 443;
+  WiFiClientSecure client;
+
+public:
+  void setHost(char* host, char* endpoint);
+  void setPort(uint16_t port);
+  void setContentType(char* type);
+  void setHeader(char* header);
+  bool post(char* host, char* path, const char* data);
+  bool post(char* host, char* path, String data);
+  bool get(char* host, char* path);
+  bool isSecureUrl(const char* url);
+  bool requestRaw(char* method, char* host, char* path);
+  bool receive();
+  bool postData(const char* data);
+  bool errorCheck(char* host, char* path);
+  void deleteCRLF(const char* str, char* content);
 };
 
 extern WebhookClass Webhook;
